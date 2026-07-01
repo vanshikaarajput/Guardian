@@ -4,7 +4,6 @@
 
 Guardian is a personal safety application designed to provide emergency assistance through features such as real-time location tracking, SOS alerts, and emergency contact management. The project is being developed using React Native (Expo), Node.js, Express.js, Prisma, and Neon PostgreSQL.
 
-
 # Challenges Faced
 
 ## 1. Choosing the Right Backend Architecture
