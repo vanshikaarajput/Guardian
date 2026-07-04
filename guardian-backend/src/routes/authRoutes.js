@@ -1,8 +1,21 @@
-const express = require("express"); // imports express
-const router = express.Router();//creates a mini router
+const express = require("express");
+const router = express.Router();
 
-const { registerUser } = require("../controllers/authController"); //Imports our controller function.
+const {
+  registerUser,
+  loginUser,
+} = require("../controllers/authController");
 
-router.post("/register", registerUser); // POST /register -> run registerUser()
+const protect = require("../middleware/authMiddleware");
 
-module.exports = router; //Exports the router so app.js can use it.
+router.post("/register", registerUser);
+router.post("/login", loginUser);
+
+router.get("/me", protect, (req, res) => {
+  res.status(200).json({
+    message: "Protected route accessed",
+    user: req.user,
+  });
+});
+
+module.exports = router;
