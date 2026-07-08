@@ -4,14 +4,18 @@ const router = express.Router();
 const {
   addContact,
   getAllContacts,
+  updateExistingContact,
 } = require("../controllers/contactController");
 
 const protect = require("../middleware/authMiddleware");
 
-// Add a new emergency contact
+// Create Contact
 router.post("/", protect, addContact);
 
-// Get all emergency contacts of logged-in user
+// Get All Contacts
 router.get("/", protect, getAllContacts);
+
+// Update Contact
+router.put("/:id", protect, updateExistingContact);
 
 module.exports = router;

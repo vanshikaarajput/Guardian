@@ -1,10 +1,8 @@
-//addidng comments so that ik what im doing
-
-//create prisma client - communication with postgresqldb
+// Create Prisma Client
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-//create servicefun - keeps the service indep of express
+// Create a new emergency contact
 const createContact = async (userId, contactData) => {
 
     //extract data
@@ -25,10 +23,7 @@ const createContact = async (userId, contactData) => {
   return contact;
 };
 
-module.exports = {
-  createContact,
-};
-
+// Get all emergency contacts of a user
 const getContacts = async (userId) => {
   const contacts = await prisma.emergencyContact.findMany({
     where: {
@@ -40,4 +35,24 @@ const getContacts = async (userId) => {
   });
 
   return contacts;
+};
+
+
+const updateContact = async (contactId, userId, contactData) => {
+  const contact = await prisma.emergencyContact.updateMany({
+    where: {
+      id: contactId,
+      userId,
+    },
+    data: contactData,
+  });
+
+  return contact;
+};
+
+
+module.exports = {
+  createContact,
+  getContacts,
+  updateContact,
 };
