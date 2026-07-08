@@ -1,31 +1,35 @@
 const express = require("express");
+
 const authRoutes = require("./routes/authRoutes");
+const contactRoutes = require("./routes/contactRoutes");
 
 const app = express();
 
+// ===============================
 // Middleware
+// ===============================
 app.use(express.json());
 
+// ===============================
 // Routes
+// ===============================
 app.use("/api/auth", authRoutes);
+app.use("/api/contacts", contactRoutes);
 
-// Health Check Route
-app.get("/health", (req, res) => {
-  res.send(`
-    <h2>GUARDIAN API IS HEALTHY</h2>
-    <p>AUTHOR : VANSHIKA RAJPUT</p>
-  `);
-});
-
+// ===============================
 // Home Route
+// ===============================
 app.get("/", (req, res) => {
-  res.send(`
-    <h2>Guardian Backend is Running 🚀</h2>
-    <h3>Time: ${new Date().toLocaleString()}</h3>
-  `);
+  res.status(200).json({
+    message: "Guardian Backend is Running 🚀",
+    author: "Vanshika Rajput",
+    timestamp: new Date(),
+  });
 });
 
+// ===============================
 // Health Check Route
+// ===============================
 app.get("/health", (req, res) => {
   res.status(200).json({
     status: "OK",
@@ -35,7 +39,9 @@ app.get("/health", (req, res) => {
   });
 });
 
+// ===============================
 // 404 Route Handler
+// ===============================
 app.use((req, res) => {
   res.status(404).json({
     success: false,
