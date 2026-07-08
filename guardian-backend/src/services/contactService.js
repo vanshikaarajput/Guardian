@@ -28,3 +28,16 @@ const createContact = async (userId, contactData) => {
 module.exports = {
   createContact,
 };
+
+const getContacts = async (userId) => {
+  const contacts = await prisma.emergencyContact.findMany({
+    where: {
+      userId,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  return contacts;
+};
