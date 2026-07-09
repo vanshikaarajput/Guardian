@@ -2,6 +2,7 @@ const {
   createContact,
   getContacts,
   updateContact,
+  deleteContact,
 } = require("../services/contactService");
 
 const addContact = async (req, res) => {
@@ -82,8 +83,34 @@ const updateExistingContact = async (req, res) => {
     });
   }
 };
+const deleteExistingContact = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const contact = await deleteContact(req.user.userId, id);
+
+    if (!contact) {
+      return res.status(404).json({
+        message: "Contact not found",
+      });
+    }
+
+    return res.status(200).json({
+      message: "Emergency contact deleted successfully",
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+
 module.exports = {
   addContact,
   getAllContacts,
   updateExistingContact,
+  deleteExistingContact,
 };
