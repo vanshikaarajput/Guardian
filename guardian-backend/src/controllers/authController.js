@@ -116,6 +116,10 @@ const loginUser = async (req, res) => {
   }
 };
 
+
+//delete contact
+deleteContact()
+
 module.exports = {
   registerUser,
   loginUser,

@@ -50,9 +50,31 @@ const updateContact = async (contactId, userId, contactData) => {
   return contact;
 };
 
+//delete contact
+const deleteContact = async (userId, contactId) => {
+  const contact = await prisma.emergencyContact.findFirst({
+    where: {
+      id: contactId,
+      userId,
+    },
+  });
+
+  if (!contact) {
+    return null;
+  }
+
+  await prisma.emergencyContact.delete({
+    where: {
+      id: contactId,
+    },
+  });
+
+  return contact;
+};
 
 module.exports = {
   createContact,
   getContacts,
-  updateContact,
+  deleteContact,
 };
+
