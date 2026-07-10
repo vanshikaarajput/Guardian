@@ -107,6 +107,7 @@ const loginUser = async (req, res) => {
         phone: user.phone,
       },
     });
+    
   } catch (error) {
     console.log(error);
 
