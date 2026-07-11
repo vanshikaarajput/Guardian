@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const prisma = new PrismaClient();
 
+// Register User
 const registerUser = async (req, res) => {
   try {
     const { name, email, password, phone } = req.body;
@@ -47,7 +48,7 @@ const registerUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       message: "Internal Server Error",
@@ -55,6 +56,7 @@ const registerUser = async (req, res) => {
   }
 };
 
+// Login User
 const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -66,7 +68,9 @@ const loginUser = async (req, res) => {
     }
 
     const user = await prisma.user.findUnique({
-      where: { email },
+      where: {
+        email,
+      },
     });
 
     if (!user) {
@@ -107,19 +111,14 @@ const loginUser = async (req, res) => {
         phone: user.phone,
       },
     });
-    
   } catch (error) {
-    console.log(error);
+    console.error(error);
 
     return res.status(500).json({
       message: "Internal Server Error",
     });
   }
 };
-
-
-//delete contact
-deleteContact()
 
 module.exports = {
   registerUser,
