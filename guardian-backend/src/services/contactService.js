@@ -2,13 +2,12 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-// Create a new emergency contact
+// ==========================
+// Create Contact
+// ==========================
 const createContact = async (userId, contactData) => {
-
-    //extract data
   const { name, phone, relation } = contactData;
 
-  //save to database - prisma inserts a new row to emerg contact table
   const contact = await prisma.emergencyContact.create({
     data: {
       name,
@@ -18,12 +17,12 @@ const createContact = async (userId, contactData) => {
     },
   });
 
-
-  //return the contact - controller w use this to send the response
   return contact;
 };
 
-// Get all emergency contacts of a user
+// ==========================
+// Get All Contacts
+// ==========================
 const getContacts = async (userId) => {
   const contacts = await prisma.emergencyContact.findMany({
     where: {
@@ -37,9 +36,11 @@ const getContacts = async (userId) => {
   return contacts;
 };
 
-
+// ==========================
+// Update Contact
+// ==========================
 const updateContact = async (contactId, userId, contactData) => {
-  const contact = await prisma.emergencyContact.updateMany({
+  const result = await prisma.emergencyContact.updateMany({
     where: {
       id: contactId,
       userId,
@@ -47,10 +48,12 @@ const updateContact = async (contactId, userId, contactData) => {
     data: contactData,
   });
 
-  return contact;
+  return result;
 };
 
-//delete contact
+// ==========================
+// Delete Contact
+// ==========================
 const deleteContact = async (userId, contactId) => {
   const contact = await prisma.emergencyContact.findFirst({
     where: {
@@ -75,6 +78,6 @@ const deleteContact = async (userId, contactId) => {
 module.exports = {
   createContact,
   getContacts,
+  updateContact,
   deleteContact,
 };
-
