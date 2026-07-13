@@ -2,6 +2,7 @@ const express = require("express");
 
 const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoutes");
+const sosRoutes = require("./routes/sosRoutes");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 // ===============================
 app.use("/api/auth", authRoutes);
 app.use("/api/contacts", contactRoutes);
+app.use("/api/sos", sosRoutes);
 
 // ===============================
 // Home Route

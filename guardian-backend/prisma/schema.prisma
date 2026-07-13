@@ -15,6 +15,7 @@ model User {
   phone     String
 
   emergencyContacts EmergencyContact[]
+  sosAlerts          SOSAlert[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -32,4 +33,18 @@ model EmergencyContact {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model SOSAlert {
+  id        String   @id @default(uuid())
+
+  latitude  Float
+  longitude Float
+
+  status    String   @default("ACTIVE")
+
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
 }
