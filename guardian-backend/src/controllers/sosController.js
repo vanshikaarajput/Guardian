@@ -1,11 +1,17 @@
-const { createSOSAlert } = require("../services/sosService");
+const {
+  createSOSAlert,
+  getSOSHistory,
+} = require("../services/sosService");
 
+// ==========================
+// Create SOS Alert
+// ==========================
 const createSOS = async (req, res) => {
   try {
     const { latitude, longitude } = req.body;
 
     // Validate request body
-    if (latitude === undefined || longitude === undefined) {
+    if (latitude === undefined || longitude ===undefined) {
       return res.status(400).json({
         message: "Latitude and Longitude are required",
       });
@@ -29,6 +35,28 @@ const createSOS = async (req, res) => {
   }
 };
 
+// ==========================
+// Get SOS History
+// ==========================
+const getAllSOSAlerts = async (req, res) => {
+  try {
+    const sosAlerts = await getSOSHistory(req.user.userId);
+
+    return res.status(200).json({
+      success: true,
+      count: sosAlerts.length,
+      sosAlerts,
+    });
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 module.exports = {
   createSOS,
+  getAllSOSAlerts,
 };
