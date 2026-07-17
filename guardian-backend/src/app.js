@@ -4,6 +4,7 @@ const profileRoutes = require("./routes/profileRoutes");
 const authRoutes = require("./routes/authRoutes");
 const contactRoutes = require("./routes/contactRoutes");
 const sosRoutes = require("./routes/sosRoutes");
+const locationRoutes = require("./routes/locationRoutes");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use("/api/profile", profileRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/contacts", contactRoutes);
 app.use("/api/sos", sosRoutes);
+app.use("/api/location", locationRoutes);
 
 // ===============================
 // Home Route
