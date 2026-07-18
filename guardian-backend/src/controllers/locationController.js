@@ -8,7 +8,7 @@ const updateUserLocation = async (req, res) => {
         const { latitude, longitude } = req.body;
 
         const location = await updateLocation(
-            req.user.id,
+            req.user.userId,
             latitude,
             longitude
         );
@@ -28,7 +28,7 @@ const updateUserLocation = async (req, res) => {
 
 const getUserLocation = async (req, res) => {
     try {
-        const location = await getLocation(req.user.id);
+        const location = await getLocation(req.user.userId);
 
         if (!location) {
             return res.status(404).json({
