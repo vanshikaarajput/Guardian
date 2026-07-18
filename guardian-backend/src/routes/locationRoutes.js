@@ -5,8 +5,7 @@ const {
     getUserLocation,
 } = require("../controllers/locationController");
 
-const { protect } = require("../middleware/authMiddleware");
-
+const protect = require("../middleware/authMiddleware");
 const router = express.Router();
 
 router.put("/", protect, updateUserLocation);
