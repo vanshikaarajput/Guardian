@@ -2,6 +2,11 @@
 
 Guardian is a full-stack mobile application designed to improve personal safety through real-time location tracking, SOS alerts, and emergency contact management.
 
+## System Architecture
+
+<img width="2392" height="890" alt="Guardian" src="https://github.com/user-attachments/assets/f9fbe309-85c7-4f9b-bd6d-f5b1befb498b" />
+
+
 ##  Features
 - User Authentication
 - Emergency Contacts
